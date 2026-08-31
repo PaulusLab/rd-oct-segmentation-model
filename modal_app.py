@@ -9,6 +9,7 @@ import io
 import os
 
 import modal
+from fastapi import File, HTTPException, UploadFile
 
 app = modal.App("rd-oct-segmentation")
 
@@ -56,16 +57,13 @@ def _get_predict():
 
 @app.function(image=image)
 @modal.fastapi_endpoint(method="POST")
-async def segment(image: "UploadFile" = None):
-    from fastapi import UploadFile, File
+async def segment(image: UploadFile = File(...)):
     import numpy as np
     from PIL import Image as PILImage
 
-    if image is None:
-        from fastapi import HTTPException
-        raise HTTPException(status_code=400, detail="No image provided.")
-
     contents = await image.read()
+    if not contents:
+        raise HTTPException(status_code=400, detail="No image provided.")
     tmp_path = "/tmp/upload.png"
     with open(tmp_path, "wb") as f:
         f.write(contents)
