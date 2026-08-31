@@ -9,8 +9,7 @@ membrane). Developed by the Paulus Lab, Johns Hopkins University.
 ## Live demo
 
 Try it at [pauluslab.github.io/tools/rd-oct-segmentation-tool.html](https://pauluslab.github.io/tools/rd-oct-segmentation-tool.html),
-served by a [Hugging Face Space](https://huggingface.co/spaces/PaulusLab/rd-oct-segmentation) running
-the exact code in this repo.
+served by a [Modal](https://modal.com) serverless endpoint running the exact code in this repo.
 
 ## Performance
 
